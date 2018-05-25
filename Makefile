@@ -4,7 +4,6 @@ BIN_DIR ?= ${CURDIR}/bin/
 LIB_DIR ?= ${CURDIR}/lib/
 
 TARGET ?= ghdl2hastabel.jar
-RUN_SCRIPT ?= ghdl2hastabel.sh
 INSTALL_DIR ?= $(LIB_DIR)
 
 #### Where to get the missing Jar files.
@@ -36,16 +35,18 @@ endif
 CLASSPATH = "$(SRC_DIR):$(BIN_DIR)"
 
 ## Makefile Magic ##############################################################
+MANIFEST = $(SRC_DIR)/Manifest.txt
+
 JAVA_SOURCES = \
 	$(wildcard $(SRC_DIR)/ghdl2hastabel/*.java) \
 	$(wildcard $(SRC_DIR)/ghdl2hastabel/*/*.java)
 CLASSES = $(patsubst $(SRC_DIR)/%,$(BIN_DIR)/%, $(JAVA_SOURCES:.java=.class))
 
 ## Makefile Rules ##############################################################
-$(TARGET): $(RUN_SCRIPT) $(JAVA_SOURCES) $(CLASSES)
+$(TARGET): $(JAVA_SOURCES) $(CLASSES) $(MANIFEST)
 	$(MAKE) $(LIB_DIR)
 	rm -f $(TARGET) $(INSTALL_DIR)/$@
-	$(JAR) cf $@ -C $(BIN_DIR) .
+	$(JAR) cfm $@ $(MANIFEST) -C $(BIN_DIR) .
 	cp $@ $(INSTALL_DIR)/$@
 
 clean:
@@ -59,11 +60,6 @@ $(CLASSES): $(BIN_DIR)/%.class: $(SRC_DIR)/%.java $(BIN_DIR)
 	$(MAKE) $(LIB_DIR)
 	echo "Attempting to download missing jar '$@'..."
 	cd $(LIB_DIR); $(DOWNLOADER) "$(JAR_SOURCE)/$(notdir $@)"
-
-$(RUN_SCRIPT): Makefile
-	echo "#!/bin/sh" > $@
-	echo "$(JAVA) -cp \"$(CLASSPATH)\" ghdl2hastabel.Main \$$*" >> $@
-	chmod +x $@
 
 $(LIB_DIR):
 	mkdir -p $@
