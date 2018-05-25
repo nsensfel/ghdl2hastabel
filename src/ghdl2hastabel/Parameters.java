@@ -14,9 +14,9 @@ public class Parameters
    {
       System.out.println
       (
-         "AST-to-Instr\n"
+         "GHDL to HaStABeL\n"
          + "USAGE:\n"
-         + "\tjava Main <XML_FILE> <OUTPUT_DIR>\n"
+         + "\tjava -jar ghdl2hastabel.jar <XML_FILE> <OUTPUT_DIR>\n"
          + "PARAMETERS:\n"
          + "\t- <XML_FILE>\tThe AST (XML format).\n"
          + "\t- <OUTPUT_DIR>\tThe output directory (must already exist)."
