@@ -18,13 +18,25 @@ public class Functions
       final IDs... params
    )
    {
-      output.write("(set_function ");
+      boolean is_first;
+
+      is_first = true;
 
       output.write(function_name);
+      output.write("(");
 
       for (final IDs param: params)
       {
-         output.write(" " + param.get_value());
+         if (is_first)
+         {
+            is_first = false;
+         }
+         else
+         {
+            output.write(", ");
+         }
+
+         output.write(param.get_value());
       }
 
       output.write(")");
