@@ -1,6 +1,5 @@
 package ghdl2hastabel.vhdl;
 
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Waveforms;
 import ghdl2hastabel.Functions;
 import ghdl2hastabel.Predicates;
@@ -90,7 +89,7 @@ public class Signal extends ParsableXML
       (
          "line",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "line")
          )
@@ -106,7 +105,7 @@ public class Signal extends ParsableXML
       (
          "column",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "col")
          )
@@ -122,7 +121,7 @@ public class Signal extends ParsableXML
       (
          "identifier",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "identifier")
          )
@@ -285,7 +284,7 @@ public class Signal extends ParsableXML
       (
          "is_of_kind",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute
             (

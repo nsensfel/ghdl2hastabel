@@ -1,4 +1,8 @@
-package ghdl2hastabel;
+package ghdl2hastabel.vhdl;
+
+import ghdl2hastabel.IDs;
+import ghdl2hastabel.XMLManager;
+import ghdl2hastabel.Waveforms;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -174,7 +178,7 @@ public class Expressions
          structure.append("(?");
          elements.add
          (
-            Strings.get_id_from_string
+            IDs.get_id_from_string
             (
                op.symbol
             )
@@ -209,7 +213,7 @@ public class Expressions
          structure.append("(?");
          elements.add
          (
-            Strings.get_id_from_string
+            IDs.get_id_from_string
             (
                op.symbol
             )
@@ -293,7 +297,7 @@ public class Expressions
           */
          elements.add
          (
-            Strings.get_id_from_string
+            IDs.get_id_from_string
             (
                XMLManager.get_attribute(named_entity, "identifier")
             )
@@ -393,10 +397,7 @@ public class Expressions
          structure.append("?");
          elements.add
          (
-            Strings.get_id_from_string
-            (
-               "l"
-            )
+            IDs.get_id_from_string("l")
          );
 
       }
@@ -406,7 +407,7 @@ public class Expressions
 
          elements.add
          (
-            Strings.get_id_from_string
+            IDs.get_id_from_string
             (
                /* FIXME: Kind of a hacky */
                kind.replace("_attribute", "")

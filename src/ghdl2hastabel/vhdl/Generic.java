@@ -1,6 +1,5 @@
 package ghdl2hastabel.vhdl;
 
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Waveforms;
 import ghdl2hastabel.Functions;
 import ghdl2hastabel.Predicates;
@@ -86,7 +85,7 @@ public class Generic extends ParsableXML
       (
          "line",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "line")
          )
@@ -102,7 +101,7 @@ public class Generic extends ParsableXML
       (
          "column",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "col")
          )
@@ -118,7 +117,7 @@ public class Generic extends ParsableXML
       (
          "identifier",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "identifier")
          )

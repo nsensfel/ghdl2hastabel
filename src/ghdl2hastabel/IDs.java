@@ -37,6 +37,21 @@ public class IDs
          );
    }
 
+   public static IDs get_id_from_string
+   (
+      String string
+   )
+   {
+      if (string == null)
+      {
+         string = "";
+      }
+
+      string = "\"" + string.toLowerCase() + "\"";
+
+      return new IDs(string, true);
+   }
+
    public static IDs get_id_from_xml_id
    (
       final OutputFile output,
@@ -54,11 +69,10 @@ public class IDs
 
          FROM_XML.put(xml_id, result);
 
-         XML_MAP_OUTPUT.write("(xml->instr ");
+         XML_MAP_OUTPUT.write("xml->instr ");
          XML_MAP_OUTPUT.write(xml_id);
-         XML_MAP_OUTPUT.write(" ");
-         XML_MAP_OUTPUT.write(Integer.toString(result.get_value()));
-         XML_MAP_OUTPUT.write(")");
+         XML_MAP_OUTPUT.write("->");
+         XML_MAP_OUTPUT.write(result.get_value());
          XML_MAP_OUTPUT.insert_newline();
 
       }
@@ -89,7 +103,7 @@ public class IDs
    {
       final IDs result;
 
-      result = new IDs(type);
+      result = new IDs(type, false);
 
       if (type != null)
       {
@@ -100,16 +114,24 @@ public class IDs
    }
 
    /** Non-Static *************************************************************/
-   private final int value;
+   private final String value;
    private String type;
 
-   private IDs (final String type)
+   private IDs (final String type_or_val, boolean is_string)
    {
-      this.type = type;
+      if (is_string)
+      {
+         type = "string";
+         value = type_or_val;
+      }
+      else
+      {
+         type = type_or_val;
 
-      value = IDs.next_id;
+         value = Integer.toString(IDs.next_id);
 
-      IDs.next_id += 1;
+         IDs.next_id += 1;
+      }
    }
 
    public String get_type ()
@@ -117,18 +139,21 @@ public class IDs
       return type;
    }
 
-   public int get_value ()
+   public String get_value ()
    {
       return value;
    }
 
    private void add_to_output (final OutputFile output)
    {
-      output.write("(add_element ");
+      if (type.equals("string"))
+      {
+         return;
+      }
+
       output.write(type);
       output.write(" ");
-      output.write(Integer.toString(value));
-      output.write(")");
+      output.write(value);
       output.insert_newline();
    }
 }

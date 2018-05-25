@@ -1,7 +1,6 @@
 package ghdl2hastabel.vhdl;
 
 import ghdl2hastabel.OutputFile;
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Waveforms;
 import ghdl2hastabel.Functions;
 import ghdl2hastabel.Predicates;
@@ -112,7 +111,7 @@ public class Process extends ParsableXML
       (
          "line",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "line")
          )
@@ -128,7 +127,7 @@ public class Process extends ParsableXML
       (
          "column",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "col")
          )
@@ -144,7 +143,7 @@ public class Process extends ParsableXML
       (
          "label",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "label")
          )
@@ -436,7 +435,7 @@ public class Process extends ParsableXML
             OutputFile.new_output_file
             (
                "cfg_" /* TODO: Prefix as parameter? */
-               + Integer.toString(local_id.get_value())
+               + local_id.get_value()
                + ".mod" /* TODO: Suffix as parameter? */
             ),
             local_id,

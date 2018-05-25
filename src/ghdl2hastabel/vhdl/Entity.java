@@ -1,6 +1,5 @@
 package ghdl2hastabel.vhdl;
 
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Functions;
 import ghdl2hastabel.Predicates;
 import ghdl2hastabel.ParsableXML;
@@ -103,7 +102,7 @@ public class Entity extends ParsableXML
       (
          "line",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "line")
          )
@@ -119,7 +118,7 @@ public class Entity extends ParsableXML
       (
          "column",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "col")
          )
@@ -135,7 +134,7 @@ public class Entity extends ParsableXML
       (
          "identifier",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "col")
          )

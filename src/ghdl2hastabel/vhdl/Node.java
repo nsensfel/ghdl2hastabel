@@ -1,8 +1,6 @@
 package ghdl2hastabel.vhdl;
 
-import ghdl2hastabel.Expressions;
 import ghdl2hastabel.OutputFile;
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Predicates;
 import ghdl2hastabel.ParsableXML;
 import ghdl2hastabel.IDs;
@@ -58,7 +56,7 @@ public abstract class Node extends ParsableXML
          output,
          "is_read_structure",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             structure.toString()
          )
@@ -73,7 +71,7 @@ public abstract class Node extends ParsableXML
             output,
             "is_read_element",
             local_id,
-            Strings.get_id_from_string(Integer.toString(i)),
+            IDs.get_id_from_string(Integer.toString(i)),
             elements.get(i)
          );
 
@@ -107,7 +105,7 @@ public abstract class Node extends ParsableXML
          output,
          "is_written_structure",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             structure.toString()
          )
@@ -122,7 +120,7 @@ public abstract class Node extends ParsableXML
             output,
             "is_written_element",
             local_id,
-            Strings.get_id_from_string(Integer.toString(i)),
+            IDs.get_id_from_string(Integer.toString(i)),
             elements.get(i)
          );
 

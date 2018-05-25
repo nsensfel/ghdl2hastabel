@@ -3,7 +3,6 @@ package ghdl2hastabel.vhdl;
 import ghdl2hastabel.Depths;
 import ghdl2hastabel.Main;
 import ghdl2hastabel.OutputFile;
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Waveforms;
 import ghdl2hastabel.Functions;
 import ghdl2hastabel.Predicates;
@@ -104,7 +103,7 @@ public class SSASNode extends ghdl2hastabel.vhdl.Node
          output,
          "label",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "label")
          )
@@ -121,7 +120,7 @@ public class SSASNode extends ghdl2hastabel.vhdl.Node
          output,
          "kind",
          local_id,
-         Strings.get_id_from_string("signal_assignement")
+         IDs.get_id_from_string("signal_assignement")
       );
    }
 
@@ -154,7 +153,7 @@ public class SSASNode extends ghdl2hastabel.vhdl.Node
             output,
             "has_option",
             local_id,
-            Strings.get_id_from_string(s)
+            IDs.get_id_from_string(s)
          );
       }
    }

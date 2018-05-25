@@ -1,6 +1,5 @@
 package ghdl2hastabel.vhdl;
 
-import ghdl2hastabel.Strings;
 import ghdl2hastabel.Functions;
 import ghdl2hastabel.ParsableXML;
 import ghdl2hastabel.XMLManager;
@@ -80,7 +79,7 @@ public class File extends ParsableXML
       (
          "filename",
          local_id,
-         Strings.get_id_from_string
+         IDs.get_id_from_string
          (
             XMLManager.get_attribute(xml_node, "file")
          )
