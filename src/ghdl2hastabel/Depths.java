@@ -16,7 +16,7 @@ public class Depths
       TO_ID = new HashMap<Integer, IDs>();
 
       /* TODO: filename as a param? */
-      DEPTHS_OUTPUT = OutputFile.new_output_file("depths.mod");
+      DEPTHS_OUTPUT = OutputFile.new_output_file("01_depths.mod");
    }
 
    private Depths () {} /* Utility class. */

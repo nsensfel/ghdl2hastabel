@@ -434,7 +434,7 @@ public class Process extends ParsableXML
          (
             OutputFile.new_output_file
             (
-               "cfg_" /* TODO: Prefix as parameter? */
+               "03_cfg_" /* TODO: Prefix as parameter? */
                + local_id.get_value()
                + ".mod" /* TODO: Suffix as parameter? */
             ),

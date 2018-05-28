@@ -59,7 +59,7 @@ public class Main
          return;
       }
 
-      MAIN_OUTPUT = OutputFile.new_output_file("structural.mod");
+      MAIN_OUTPUT = OutputFile.new_output_file("00_structural.mod");
 
       try
       {
