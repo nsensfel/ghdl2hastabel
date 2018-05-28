@@ -1,0 +1,183 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Structural Level ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+add_type entity
+add_type port
+add_type port_mode
+add_type generic
+add_type architecture
+add_type signal
+add_type process
+add_type file
+add_type component
+add_type waveform
+add_type string
+add_type type
+add_type type_kind
+add_type signal_kind
+
+;; Entity
+add_predicate is_in_file(entity, file)
+add_predicate has_begin(entity)
+add_predicate has_visible_flag(entity)
+add_predicate end_has_reserved_id(entity)
+add_predicate end_has_identifier(entity)
+add_predicate is_simulation_scenario(entity)
+add_function line(entity, string)
+add_function column(entity, string)
+add_function identifier(entity, string)
+
+;; Port
+add_predicate is_port_of(port, entity)
+add_predicate has_disconnect_flag(port)
+add_predicate has_mode(port, string)
+add_predicate has_class(port)
+add_predicate is_ref(port)
+add_predicate has_active_flag(port)
+add_predicate has_identifier_list(port)
+add_predicate has_visible_flag(port)
+add_predicate has_after_drivers_flag(port)
+add_predicate has_use_flag(port)
+add_predicate has_open_flag(port)
+add_predicate has_guarded_signal_flag(port)
+add_predicate is_of_kind(port, string)
+add_function line(port, string)
+add_function column(port, string)
+add_function identifier(port, string)
+
+add_predicate is_a_clock(port)
+add_predicate is_a_reset(port)
+
+;; Generic
+add_predicate is_generic_of(generic, entity)
+add_predicate has_class(generic)
+add_predicate is_ref(generic)
+add_predicate has_identifier_list(generic)
+add_predicate has_visible_flag(generic)
+add_predicate has_after_drivers_flag(generic)
+add_predicate is_of_type(generic, type)
+add_function line(generic, string)
+add_function column(generic, string)
+add_function identifier(generic, string)
+
+;; Architecture
+add_predicate is_in_file(architecture, file)
+add_predicate is_architecture_of(architecture, entity)
+add_predicate has_foreign_flag(architecture)
+add_predicate has_visible_flag(architecture)
+add_predicate is_within_flag(architecture)
+add_predicate end_has_reserved_id(architecture)
+add_predicate end_has_identifier(architecture)
+add_function line(architecture, string)
+add_function column(architecture, string)
+add_function identifier(architecture, string)
+
+;; Signal
+add_predicate belongs_to_architecture(signal, architecture)
+add_predicate has_disconnect_flag(signal)
+add_predicate is_ref(signal)
+add_predicate has_active_flag(signal)
+add_predicate has_identifier_list(signal)
+add_predicate has_visible_flag(signal)
+add_predicate has_after_drivers(signal)
+add_predicate has_use_flag(signal)
+add_predicate has_open_flag(signal)
+add_predicate has_guarded_flag(signal)
+add_predicate is_of_kind(signal, string)
+add_predicate is_of_type(signal, type)
+add_function line(signal, string)
+add_function column(signal, string)
+add_function identifier(signal, string)
+
+;; Process
+add_predicate belongs_to_architecture(process, architecture)
+add_predicate has_seen_flag(process)
+add_predicate end_has_postboned(process)
+add_predicate has_postboned_flag(process)
+add_predicate is_ref(process)
+add_predicate has_passive_flag(process)
+add_predicate has_visible_flag(process)
+add_predicate is_within_flag(process)
+add_predicate has_label(process)
+add_predicate has_is(process)
+add_predicate end_has_reserved_id(process)
+add_predicate end_has_identifier(process)
+add_predicate is_explicit_process(process)
+add_function line(process, string)
+add_function column(process, string)
+add_function label(process, string)
+
+;; File
+add_function filename(file, string)
+
+;; Component
+add_predicate is_component_of(component, entity)
+add_predicate belongs_to_architecture(component, architecture)
+add_predicate port_maps(component, waveform, port)
+add_function line(component, string)
+add_function column(component, string)
+add_function label(component, string)
+
+;; Waveform
+add_predicate is_in_sensitivity_list(waveform, process)
+add_predicate is_accessed_by(waveform, process)
+add_predicate is_waveform_of(waveform, signal)
+add_predicate is_waveform_of(waveform, port)
+add_predicate is_waveform_of(waveform, generic)
+
+;; String
+add_predicate string_matches(string, string)
+;; is_accessed_by's signature must match is_read_element and
+;; is_written_element's
+add_predicate is_accessed_by(string, process)
+
+;; Type
+add_predicate is_approved_type(type)
+add_predicate is_of_kind(type, string)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Instances ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+add_type wfm_instance
+add_type ps_instance
+
+add_predicate is_wfm_instance_of(wfm_instance, waveform)
+add_predicate is_visible_in(wfm_instance, entity)
+
+add_predicate is_ps_instance_of(ps_instance, process)
+add_predicate is_visible_in(ps_instance, entity)
+
+add_predicate process_instance_maps(ps_instance, wfm_instance, waveform)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Control Flow Level ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+add_type node
+add_type depth
+
+add_predicate is_start_node(node, process)
+add_predicate has_option(node, string)
+add_predicate node_connect(node, node)
+
+;;; To be removed soon.
+add_predicate expr_writes(node, waveform)
+
+add_predicate is_read_structure(node, string)
+add_predicate is_read_element(node, string, waveform)
+add_predicate is_read_element(node, string, string)
+add_predicate is_terminal(node)
+
+add_predicate is_lower_than(depth, depth)
+
+add_function label(node, string)
+add_function kind(node, string)
+add_function depth(node, depth)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Control Flow Level (First Order Additions) ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+add_type path
+
+add_predicate is_path_of(path, node)
+add_predicate contains_node(path, node)
+add_predicate is_before(path, node, node)
